@@ -37,7 +37,7 @@ module RSpecExtensionsCollection
         @model_class.delete_all
         create_models
         @search_result = model_class.search(KEYWORD)
-        execute_query_to_models(@search_result) == @matching_models
+        execute_query_to_models(@search_result.asc(:_id)) == @matching_models
       end
 
       def failure_message_for_should

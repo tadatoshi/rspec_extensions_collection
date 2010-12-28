@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec_extensions_collection (0.0.1)
+    rspec_extensions_collection (0.0.2)
       rspec
 
 GEM
