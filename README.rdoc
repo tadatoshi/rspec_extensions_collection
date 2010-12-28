@@ -41,7 +41,7 @@
 
      Example: BlogPost.should search_by(:title, :content, :locale => I18n.locale.to_s)
 
-   2-2. SearchEmbeddedMatcher
+   2-2. SearchEmbeddedMatcher - For Mongoid embedded documents.
 
      search_embedded_by(association_name, *args)
 
