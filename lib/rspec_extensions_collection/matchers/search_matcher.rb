@@ -2,6 +2,7 @@ module RSpecExtensionsCollection
   module Matchers
 
     # Asserts the search is made with the given fields with the option specifying if the result if filtered by locale.
+    # The method to test: search(keyword)
     #
     # Options:
     #
@@ -79,8 +80,8 @@ module RSpecExtensionsCollection
               else
                 model_object.send(field_writer_symbol, FIELD_CONTENT_WITHOUT_KEYWORD)
               end
-              model_object.locale = locale if locale
             end
+            model_object.locale = locale if locale
           end
           model.save!
           model

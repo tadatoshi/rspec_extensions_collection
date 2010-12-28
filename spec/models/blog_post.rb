@@ -4,18 +4,16 @@ class BlogPost
   field :title
   field :content
   field :locale
-  field :user_id
 
   index :title
   index :locale
-  index :user_id
   
   before_validation :assign_current_locale
 
   validates :title, :presence => true
   validates :locale, :presence => true  
 
-  # embeds_many :comments, :class_name => "Blogs::Comment"
+  embeds_many :comments, :class_name => "Blogs::Comment"
 
   scope :ordered, desc(:_id)  
   scope :in_current_locale, lambda { where(:locale => I18n.locale.to_s) }
@@ -24,6 +22,10 @@ class BlogPost
 
     def search(keyword)
       in_current_locale.where("this.title.match(/#{keyword}/i) || this.content.match(/#{keyword}/i)")
+    end
+    
+    def search_embedded(keyword)
+      in_current_locale.where("comments.content" => Regexp.new(keyword))
     end
   
   end
