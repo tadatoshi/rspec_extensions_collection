@@ -1,0 +1,25 @@
+= RSpec extensions collection
+
+  This is a collection of various RSpec extensions I would like to use for multiple projects. 
+  The primary purpose is for me to use them anywhere so it's not necessarily made for generic use.  
+
+== Install
+
+  Put the following in Gemfile:
+    gem "rspec_extensions_collection"
+  Then execute:
+    bundle install
+  
+== Usage
+
+  1. Helpers
+
+     Include a helper you want to use in Spec.
+     Or include a helper in spec_helper.rb. e.g.
+       config.include RSpecExtensionsCollection::Matchers::MongoidModelHelpers
+  
+  2. Matchers
+
+     Put the following in spec_helper.rb:
+       config.include RSpecExtensionsCollection::Matchers
+

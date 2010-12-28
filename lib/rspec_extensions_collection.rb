@@ -1,0 +1,1 @@
+Dir[File.join("rspec_extensions_collection/**/*.rb")].each {|f| require f}
