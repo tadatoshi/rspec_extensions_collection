@@ -34,7 +34,7 @@
      search_by(*args)
 
        args: List of field name symbols. 
-             Last argument can be +Hash+ of options. 
+             Last argument can be Hash of options. 
                :locale - Specifies the locale on which the filtering the search result is based on. "en" or "fr".
 
      The method to test: search(keyword)
@@ -47,7 +47,7 @@
 
        association_name: Name of the embedded document specified in the parent document.
        args:             List of field name symbols. 
-                         Last argument can be +Hash+ of options. 
+                         Last argument can be Hash of options. 
                            :locale - Specifies the locale on which the filtering the search result is based on. "en" or "fr".
 
      The method to test: search_embedded_by(keyword)
