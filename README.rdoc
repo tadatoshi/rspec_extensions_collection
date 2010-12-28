@@ -10,7 +10,7 @@
   Then execute:
     bundle install
   
-== Usage
+== Set up
 
   1. Helpers
 
@@ -23,3 +23,33 @@
      Put the following in spec_helper.rb:
        config.include RSpecExtensionsCollection::Matchers
 
+== Usage
+
+  1. Helpers
+
+  2. Matchers
+
+   2-1. SearchMatcher
+
+     search_by(*args)
+
+       args: List of field name symbols. 
+             Last argument can be +Hash+ of options. 
+               :locale - Specifies the locale on which the filtering the search result is based on. "en" or "fr".
+
+     The method to test: search(keyword)
+
+     Example: BlogPost.should search_by(:title, :content, :locale => I18n.locale.to_s)
+
+   2-2. SearchEmbeddedMatcher
+
+     search_embedded_by(association_name, *args)
+
+       association_name: Name of the embedded document specified in the parent document.
+       args:             List of field name symbols. 
+                         Last argument can be +Hash+ of options. 
+                           :locale - Specifies the locale on which the filtering the search result is based on. "en" or "fr".
+
+     The method to test: search_embedded_by(keyword)
+
+     Example: BlogPost.should search_embedded_by(:comments, :content, :locale => I18n.locale.to_s)
