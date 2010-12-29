@@ -12,6 +12,15 @@
   
 == Set up
 
+  Note: 
+    This gem is using FactoryGirl as Factory. So in the project using this gem, FactoryGirl must be set up. 
+    So in Gemfile, either of the followings should be put:
+      For non Ruby on Rails project:
+        gem "factory_girl", ">=2.0.0.beta1"
+      For Ruby on Rails project:
+        gem "factory_girl_rails", ">=1.1.beta1"
+    Then under spec directory, create a file factories.rb. See https://github.com/thoughtbot/factory_girl more detail.
+
   1. Helpers
 
      Include a helper you want to use in Spec.
