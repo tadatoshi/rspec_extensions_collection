@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec_extensions_collection (0.0.3)
+    rspec_extensions_collection (0.0.4)
       rspec
 
 GEM
@@ -16,6 +16,7 @@ GEM
     bson_ext (1.1.5)
     builder (2.1.2)
     diff-lcs (1.1.2)
+    factory_girl (2.0.0.beta1)
     i18n (0.5.0)
     mongo (1.1.5)
       bson (>= 1.1.5)
@@ -44,6 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 1.0.0)
+  factory_girl (>= 2.0.0.beta1)
   mongoid-rspec
   rspec
   rspec_extensions_collection!

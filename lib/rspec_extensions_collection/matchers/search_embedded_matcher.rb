@@ -35,8 +35,7 @@ module RSpecExtensionsCollection
         end
 
         def create_model(field_with_keyword, locale = nil)
-          # TODO: Replace with factory:
-          parent_model = @model_class.create(:title => "Title", :content => "Content")
+          parent_model = Factory.build(@model_class.name.underscore)
           
           embedded_model = parent_model.send(@association_name).build
           @fields.each do |field| 

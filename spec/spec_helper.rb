@@ -1,9 +1,9 @@
-# $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '/../lib/rspec_extensions_collection'))
-
 require 'rspec'
 require 'rspec/core'
 require 'rspec/expectations'
 require 'mongoid'
+require 'factory_girl'
+require 'factories'
 Dir[File.expand_path(File.join(File.dirname(__FILE__), '/../lib/', 'rspec_extensions_collection/**/*.rb'))].each {|f| require f}
 Dir[File.join(File.dirname(__FILE__), "models/**/*.rb")].each {|f| require f}
 
