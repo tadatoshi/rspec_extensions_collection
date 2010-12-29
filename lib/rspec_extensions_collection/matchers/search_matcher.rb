@@ -36,7 +36,7 @@ module RSpecExtensionsCollection
         @model_class = model_class
         @model_class.delete_all
         create_models
-        @search_result = model_class.search(KEYWORD)
+        @search_result = execute
         execute_query_to_models(@search_result.asc(:_id)) == @matching_models
       end
 
@@ -45,6 +45,11 @@ module RSpecExtensionsCollection
       end
 
       private
+        # Executes the method in concern such as search:
+        def execute
+          @model_class.search(KEYWORD)
+        end
+      
         def create_models
           @all_models = []
           @matching_models = []

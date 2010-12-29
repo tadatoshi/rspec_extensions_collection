@@ -1,3 +1,5 @@
+require 'rspec_extensions_collection/matchers/search_matcher'
+
 module RSpecExtensionsCollection
   module Matchers
 
@@ -19,76 +21,22 @@ module RSpecExtensionsCollection
       SearchEmbeddedMatcher.new(association_name, *args)
     end
 
-    class SearchEmbeddedMatcher
-      include MongoidModelHelpers
-
-      KEYWORD = "temp"
-      FIELD_CONTENT_WITH_KEYWORD = "This contains the keyword #{KEYWORD} and something else."
-      FIELD_CONTENT_WITHOUT_KEYWORD = "Used for some data."
-      LOCALES = ["en", "fr"]
+    class SearchEmbeddedMatcher < SearchMatcher
 
       def initialize(association_name, *args)
         @association_name = association_name
-        if args.try(:last).instance_of?(Hash)
-          @locale = args.pop[:locale]
-        end    
-        @fields = args
-      end
-
-      def matches?(model_class)
-        @model_class = model_class
-        @model_class.delete_all
-        create_models
-        @search_result = model_class.search_embedded(KEYWORD)
-        execute_query_to_models(@search_result.asc(:_id)) == @matching_models
-      end
-
-      def failure_message_for_should
-        "expected #{@model_class} to find #{@matching_models} but got #{execute_query_to_models(@search_result)}"
+        super(*args)
       end
 
       private
-        def create_models
-          @all_models = []
-          @matching_models = []
-
-          (0..@fields.size-1).each do |index|
-            if @locale
-              model_with_matching_locale = create_model(@fields[index], @locale)
-              @matching_models << model_with_matching_locale
-              @all_models << model_with_matching_locale
-          
-              model_with_other_locale = create_model(@fields[index], other_locale)
-              @all_models << model_with_other_locale
-            else
-              model = create_model(@fields[index])
-              @matching_models << model
-              @all_models << model
-            end
-          end
-      
-          if @locale
-            LOCALES.each { |locale| @all_models << create_model(nil, locale) }
-          else
-            @all_models << create_model(nil)
-          end
+        # Executes the method in concern such as search:
+        def execute
+          @model_class.search_embedded(KEYWORD)
         end
 
         def create_model(field_with_keyword, locale = nil)
+          # TODO: Replace with factory:
           parent_model = @model_class.create(:title => "Title", :content => "Content")
-          
-          # The following doesn't work:
-          # embedded_model = parent_model.send(@association_name).build do |model_object|
-          #   @fields.each do |field| 
-          #     field_writer_symbol = "#{field}=".to_sym
-          #     if field == field_with_keyword
-          #       model_object.send(field_writer_symbol, FIELD_CONTENT_WITH_KEYWORD)
-          #     else
-          #       model_object.send(field_writer_symbol, FIELD_CONTENT_WITHOUT_KEYWORD)
-          #     end
-          #   end
-          #   model_object.locale = locale if locale
-          # end
           
           embedded_model = parent_model.send(@association_name).build
           @fields.each do |field| 
@@ -106,12 +54,6 @@ module RSpecExtensionsCollection
           parent_model.update_attributes(:locale => locale) if locale
 
           parent_model
-        end
-
-        def other_locale
-          locales_copy = Array.new(LOCALES)
-          locales_copy.delete(@locale)
-          locales_copy.first
         end
 
     end
