@@ -19,7 +19,7 @@
         gem "factory_girl", ">=2.0.0.beta1"
       For Ruby on Rails project:
         gem "factory_girl_rails", ">=1.1.beta1"
-    Then under spec directory, create a file factories.rb. See https://github.com/thoughtbot/factory_girl more detail.
+    Then under spec directory, create a file factories.rb. See https://github.com/thoughtbot/factory_girl for more detail.
 
   1. Helpers
 
