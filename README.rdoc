@@ -62,3 +62,9 @@
      The method to test: search_embedded_by(keyword)
 
      Example: BlogPost.should search_embedded_by(:comments, :content, :locale => I18n.locale.to_s)
+
+== License
+
+  Copyright (c) 2010-2011, Tadatoshi Takahashi
+
+  RSpec extensions collection is released under the MIT license. 
